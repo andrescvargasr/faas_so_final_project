@@ -1,13 +1,22 @@
 # Install OpenWhisk - Runtime Python
 
-## OpenWhisk Actions
+# Building Python Runtime using OpenWhisk Actions
 
 ## Pre-requisites
 
 - Gradle (recommended version: Gradle 5).
   - Java (recommended version: Java 8).
 - Docker (Docker version 20.10.8, build 3967b7d).
-- OpenWhisk CLI wsk ()
+- OpenWhisk CLI wsk.
+
+## Previous steps
+
+1. Open terminal and go to:
+
+```
+$ cd openwhisk-runtime-python
+```
+
 
 ## Step 1: [Install Gradle](https://gradle.org/install/)
 
@@ -66,7 +75,7 @@ Everything is good. You can continue with the other step.
 
 1. Download Gradle version 5.*: [v5.6.4](https://gradle.org/next-steps/?version=5.6.4&format=bin)
 
-## Step 1: [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
+## Step 2: [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
 
 ### Set up repository
 
@@ -154,3 +163,55 @@ sudo apt install nodejs
 
 (Node.js version: v10.19.0)
 
+
+## Install OpenWhisk
+
+**Warning**: Be sure that terminal is inside `faas_so_final_project/openwhisk/openwhisk-runtime-python`.
+
+The runtimes are built using Gradle. The file [settings.gradle](settings.gradle) lists the images that are build by default.
+To build all those images, run the following command.
+
+```
+./gradlew distDocker
+```
+
+You can optionally build a specific image by modifying the Gradle command. For example:
+```
+./gradlew core:python3Action:distDocker
+```
+
+The build will produce Docker images such as `action-python-v3.7`
+and will also tag the same image with the `whisk/` prefix. The latter
+is a convenience, which if you're testing with a local OpenWhisk
+stack, allows you to skip pushing the image to Docker Hub.
+
+The image will need to be pushed to Docker Hub if you want to test it
+with a hosted OpenWhisk installation.
+
+### Using Your Image as an OpenWhisk Action
+
+You can now use this image as an OpenWhisk action. For example, to use
+the image `action-python-v3.7` as an action runtime, you would run
+the following command.
+
+```
+wsk action update myAction myAction.py --docker $DOCKER_USER/action-python-v3.7
+```
+
+## Test Runtimes
+
+There are suites of tests that are generic for all runtimes, and some that are specific to a runtime version.
+To run all tests, there are two steps.
+
+First, you need to create an OpenWhisk snapshot release. Do this from your OpenWhisk home directory.
+```
+./gradlew install
+```
+
+Now you can build and run the tests in this repository.
+```
+./gradlew tests:test
+```
+
+
+**Next ->** [Python AI example](../openfaas/README.md)

@@ -15,8 +15,13 @@ Final Project
 
 This reposirory contain a brief description about FaaS and show a comparison between differents platforms available. More, you can see two real implementations: OpenWhishk and OpenFaaS with Jupyter Notebook (Tensorflow example instead).
 
-- [Brief Introduction to FaaS](introduction/README.md)
-- [OpenWhisk implementation](openwhisk/README.md)
+1. [Brief Introduction to FaaS](introduction/README.md)
+2. [FaaS platforms comparison](faas_comparison/README.md)
+3. [OpenWhisk](openwhisk/README.md)
+   1. [OpenWhisk implementation](openwhisk/install.md)
+      1. [Local building](openwhisk/local.md)
+      2. [OpenWhisk Actions](openwhisk/actions.md)
+4. [OpenFaaS implementation](openfaas/README.md)
 
 Root tree:
 
@@ -25,6 +30,7 @@ Root tree:
 - introduction
   - [README.md](introduction/README.md)
 - openfaas
+  - [README.md](openfaas/README.md)
 - openwhisk  
   - [README.md](openwhisk/README.md)
   - [install.md](openwhisk/install.md)
@@ -32,95 +38,22 @@ Root tree:
   - [actions.md](openwhisk/actions.md)
 
 
-# Install OpenWhisk
+## Cloning the project
 
-## Prerequisites
+This project uses SUBMODULES.
 
-These ports must be available:
-
-- ```80```, ```443```, ```9000```, ```9001```, and ```9090``` for the API Gateway.
-- ```6379``` for Redis
-- ```2181``` for Zookeper
-- ```5984``` for CouchDB
-- ```8085```, ```9333``` for OpenWhisk's Invoker
-- ```8888```, ```9222``` fot OpenWhisk's Controller
-- ```9092``` for Kafka
-- ```8001``` for Kafka Topics UI
-
-## Step 1: [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
-
-### Set up repository
-
-1. Update ```apt``` package index and install packages to allow ```apt``` to use repository over HTTPS:
-
-```bash
-$ sudo apt-get update
-```
+In order to clone it use:
 
 ```
-$ sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+git clone --recurse-submodules https://github.com/andrescvargasr/faas_so_final_project.git
 ```
 
-2. Add Docker's official GPGP key:
+## Pull and update submodules
 
-```
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-```
+You should run this command every time you want to pull:
+`git pull --recurse-submodules`
 
-3. Use the following command to set up the *stable" repository:
+## Submodules update only
 
-```
-$ echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-### Install Docker Engine
-
-1. Update the apt package index, and install the latest version of Docker Engine and containerd, or go to the next step to install a specific version:
-
-```
-$ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-2. Verify that Docker Engine is installed correctly by running the ```hello-world``` image:
-
-```
-$ sudo docker run hello-world
-```
-
-**(Docker version: Docker version 20.10.8, build 3967b7d)**
-
-## Step 2: [Install Docker Compose](https://docs.docker.com/compose/install/)
-
-1. Run this command to download the current stable release of Docker Compose:
-
-```
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
-
-2. Apply executable permissions to the binary:
-
-```
-$ sudo chmod +x /usr/local/bin/docker-compose
-```
-
-3. Test the installation 
-
-```
-$ docker-compose --version
-```
-
-**(Docker Compose version: docker-compose version 1.29.2, build 5becea4c)**
-
-## Step 3: [Install Java](https://www.oracle.com/java/technologies/downloads/)
-
-Select the correct file to install in your operative system (In this case:
-
-- Java SE 17 SDK x64. Format: [.deb](https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz)
+To update the submodules:
+`git submodule update --recursive --remote`

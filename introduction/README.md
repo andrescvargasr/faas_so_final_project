@@ -90,3 +90,5 @@ Having a third party manage part of the infrastructure makes it tough to underst
 ### More complexity required for testing
 
 It can be very difficult to incorporate FaaS code into a local testing environment, making thorough testing of an application a more intensive task.
+
+**Next ->** [FaaS platforms comparison](../faas_comparison/README.md)

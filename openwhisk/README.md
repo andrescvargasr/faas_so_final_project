@@ -25,3 +25,5 @@ Work with what you know and love. OpenWhisk supports a growing list of your favo
 If you need languages or libraries the current "out-of-the-box" runtimes do not support, you can create and customize your own executables as Zip Actions which run on the Docker runtime by using the Docker SDK. Some examples of how to support other languages using Docker Actions include a tutorial for Rust and a completed project for Haskell.
 
 Once you have your function written, use the wsk CLI, to target your Apache OpenWhisk instance, and run your first action in seconds. 
+
+**Next ->** [Local implementation OpenWhisk.](local.md)
