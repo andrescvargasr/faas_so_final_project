@@ -1,0 +1,3 @@
+[submodule "openwhisk/openwhisk-runtime-python"]
+	path = openwhisk/openwhisk-runtime-python
+	url = https://github.com/apache/openwhisk-runtime-python.git
