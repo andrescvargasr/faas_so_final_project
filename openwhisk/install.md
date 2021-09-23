@@ -89,7 +89,57 @@ $ docker-compose --version
 
 Select the correct file to install in your operative system (In this case:
 
-- Java SE 17 SDK x64. Format: [.deb](https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz)
+-### Install Java 8
+
+a. Download Java 8: [Java SE 8](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html#license-lightbox)
+
+b. Created the directory and unzip the files:
+
+```
+sudo tar zxvf jdk-8u291-linux-x64.tar.gz -C /usr/lib/jvm/
+```
+
+c. Open profile file:
+
+```
+sudo gedit /etc/profile
+```
+
+d. Created Java variable for bash in the end of profile file:
+
+```
+# Java path
+JAVA_HOME=/usr/lib/jvm/java-7-oracle
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export JAVA_HOME
+export PATH
+```
+
+After write this, close the file with Ctrl+X and save.
+
+e. Type the following command:
+
+```
+source /etc/environment
+```
+
+f. Restart the system to upgrade profile.
+
+g. After restart the system, check the version of java:
+
+```
+$ java -version
+```
+
+If the response is some like this:
+
+```
+java version "14.0.2" 2020-07-14
+Java(TM) SE Runtime Environment (build 14.0.2+12-46)
+Java HotSpot(TM) 64-Bit Server VM (build 14.0.2+12-46, mixed mode, sharing)
+```
+
+Everything is good. You can continue with the other step.
 
 ## Step 4: [Install Node.js](https://www.geeksforgeeks.org/installation-of-node-js-on-linux/)
 

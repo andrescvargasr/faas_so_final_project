@@ -61,7 +61,7 @@ Function-as-a-Service (FaaS) is a serverless way to execute modular pieces of co
 
 If a web application were a work of visual art, using microservice architecture would be like making the art out of a collection of mosaic tiles. The artist can easily add, replace, and repair one tile at a time. Monolithic architecture would be like painting the entire work on a single piece of canvas.
 
-![microservices](monolithic-application-microservice-faas.svg)
+![microservices](images/monolithic-application-microservice-faas.svg)
 
 This approach of building an application out of a set of modular components is known as microservice architecture. Dividing an application into microservices is appealing to developers because it means they can create and modify small pieces of code which can be easily implemented into their codebases. This is in contrast to monolithic architecture, in which all the code is interwoven into one large system. With large monolithic systems, even a minor changes to the application requires a hefty deploy process. FaaS eliminates this deploy complexity.
 
