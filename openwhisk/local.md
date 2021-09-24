@@ -237,7 +237,8 @@ You shoulkd see a container named `bloom_whisker` being run
 
 1. Create your function (note that each container can only hold one function)
 
-In this first example we'll be creating a very simple function
+In this first example we'll be creating a very simple function.
+
 Create a json file called `python-data-init-run.json` which will contain the function that looks something like the following:
 NOTE: value of code is the actual payload and must match the syntax of the target runtime language, in this case `python`
 

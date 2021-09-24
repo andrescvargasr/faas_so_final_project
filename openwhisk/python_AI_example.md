@@ -36,10 +36,15 @@ docker run -it -p 8888:8888 -e OPENWHISK_AUTH=`cat ~/.wskprops | grep ^AUTH= | a
 ```
 
 After, you can see a message with the URL and token to access in the browser to Jupyter and use all the examples.
+![Docker OpenWhisk AI Action](images/openwhisk_action.png)
+
+
+![Jupyter Notebook](images/python_tensorflow_notebook.png)
+
 
 (**Warning!** Everytime that you run the docker container, you will go to obtain a new token).
 
-![Docker OpenWhisk AI Action](images/openwhisk_action.png)
+![Jupyter Notebook](images/python_tensorflow_notebook_2.png)
 
 #### AI Action Sample
 

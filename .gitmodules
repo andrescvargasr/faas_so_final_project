@@ -1,3 +1,6 @@
 [submodule "openwhisk/openwhisk-runtime-python"]
 	path = openwhisk/openwhisk-runtime-python
 	url = https://github.com/apache/openwhisk-runtime-python.git
+[submodule "openfaas/serverless_notebooks"]
+	path = openfaas/serverless_notebooks
+	url = https://github.com/cmrfrd/serverless_notebooks.git

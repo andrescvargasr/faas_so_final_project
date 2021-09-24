@@ -21,7 +21,9 @@ This reposirory contain a brief description about FaaS and show a comparison bet
    1. [OpenWhisk implementation](openwhisk/install.md)
       1. [Local building](openwhisk/local.md)
       2. [OpenWhisk Actions](openwhisk/actions.md)
-4. [OpenFaaS implementation](openfaas/README.md)
+         1. [Jupyter Notebook: Python AI example](openwhisk/python_AI_example.md)
+4. [OpenFaaS](openfaas/README.md)
+   1. [OpenFaaS implementation](openfaas/install.md)
 
 Root tree:
 
