@@ -33,12 +33,9 @@ OpenFaaS® makes it easy for developers to deploy event-driven functions and mic
 
 ![Conceptual workflow](images/of-workflow.png)
 
-The Gateway can be accessed through its REST API, via the CLI or through the UI. All services or functions get a default route exposed, but custom domains can also be used for each endpoint.
+- The Gateway can be accessed through its REST API, via the CLI or through the UI. All services or functions get a default route exposed, but custom domains can also be used for each endpoint.
+- Prometheus collects metrics which are available via the Gateway's API and which are used for auto-scaling.
+- By changing the URL for a function from /function/NAME to /async-function/NAME an invocation can be run in a queue using NATS Streaming. You can also pass an optional callback URL.
+- *faas-netes* is the most popular orchestration provider for OpenFaaS, but Docker Swarm, Hashicorp Nomad, AWS Fargate/ECS, and AWS Lambda have also been developed by the community. Providers are built with the faas-provider SDK.
 
-Prometheus collects metrics which are available via the Gateway's API and which are used for auto-scaling.
-
-By changing the URL for a function from /function/NAME to /async-function/NAME an invocation can be run in a queue using NATS Streaming. You can also pass an optional callback URL.
-
-faas-netes is the most popular orchestration provider for OpenFaaS, but Docker Swarm, Hashicorp Nomad, AWS Fargate/ECS, and AWS Lambda have also been developed by the community. Providers are built with the faas-provider SDK.
-
-**Next ->** [OpenFaas Implementation](install.md)
+**Next ->** [OpenFaaS Implementation](install.md)
