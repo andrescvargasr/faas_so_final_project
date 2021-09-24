@@ -214,4 +214,4 @@ Now you can build and run the tests in this repository.
 ```
 
 
-**Next ->** [Python AI example](../openfaas/README.md)
+**Next ->** [Python AI example](python_AI_example.md)

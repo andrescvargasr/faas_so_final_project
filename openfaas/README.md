@@ -128,7 +128,7 @@ $ sudo docker run hello-world
 
 **(Docker version: Docker version 20.10.8, build 3967b7d)**
 
-## Step 2: [Install Docker Compose](https://docs.docker.com/compose/install/)
+## Step 3: [Install Docker Compose](https://docs.docker.com/compose/install/)
 
 1. Run this command to download the current stable release of Docker Compose:
 
@@ -151,7 +151,7 @@ $ docker-compose --version
 **(Docker Compose version: docker-compose version 1.29.2, build 5becea4c)**
 
 
-### Step 3: Build a cluster
+### Step 4: Build a cluster
 
 This repo requires access to a kubernetes cluster. To create a local cluster with `minikube` you can run 
 
@@ -164,6 +164,6 @@ minikube start --profile serverless-notebooks
 minikube mount $(pwd):/mnt &
 ```
 
-You can also run `./bin/start_minikube.sh` for an easy scripted one liner
+You can also run `./bin/start_minikube.sh` for an easy scripted one liner.
 
 **Next ->** [OpenFaas Implementation](install.md)

@@ -88,4 +88,4 @@ You can now go to `localhost:9999/lab` in your browser and you should see severa
 
 Now navigate to `mnt/notebooks/deploy_notebook_function.ipynb` for further instructions. 
 
-**Next ->** Go to fisrt [README.md](../README.md)
+**Next ->** Go to Introduction [README.md](../README.md)
