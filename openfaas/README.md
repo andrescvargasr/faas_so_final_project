@@ -1,169 +1,44 @@
-# [Serverless Notebook Using OpenFaaS](https://github.com/cmrfrd/serverless_notebooks)
+OpenFaaS
+===
 
-### Getting Started
----
+## [What OpenFaas is?](https://www.contino.io/insights/what-is-openfaas-and-why-is-it-an-alternative-to-aws-lambda-an-interview-with-creator-alex-ellis)
 
-#### Requirements:
+OpenFaaS makes it simple to turn anything into a serverless function that runs on Linux or Windows through Docker Swarm or Kubernetes.
 
-- [Minikube](https://github.com/kubernetes/minikube) version 0.30.0
-- [Docker](https://docs.docker.com/install/) version 18.09.1
+The target audience is developers. The idea is to make it as simple possible to create a function that is built for, deployed to and run on Docker Swarm or Kubernetes, while providing a workflow that integrates directly with the Docker ecosystem. Rather than throwing a zip file over a wall or editing in a web-form they can actually go ahead and build a Docker image from GitHub and then use the same artifact in dev, staging and production. By building on top of a container orchestration platform, you get a lot of built-in functionality such as self-healing infrastructure, auto-scaling and the ability to control every aspect of the cluster.
 
-# Step 1: [Install Minikube](https://minikube.sigs.k8s.io/docs/start/)
+## [Serverless Function Made Simple](https://github.com/openfaas/faas)
 
-To install the latest minikube stable release on x86-64 Linux using Debian package:
+OpenFaaS® makes it easy for developers to deploy event-driven functions and microservices to Kubernetes without repetitive, boiler-plate coding. Package your code or an existing binary in an OCI-compatible image to get a highly scalable endpoint with auto-scaling and metrics.
 
-```
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
-sudo dpkg -i minikube_latest_amd64.deb
-```
+### Highlights
 
-## 1. Start your cluster
+* Ease of use through UI portal and *one-click* install
+* Write services and functions in any language with [Template Store](https://www.openfaas.com/blog/template-store/) or a Dockerfile
+* Build and ship your code in an OCI-compatible/Docker image
+* Portable: runs on existing hardware or public/private cloud by leveraging [Kubernetes](https://github.com/openfaas/faas-netes)
+* [CLI](http://github.com/openfaas/faas-cli) available with YAML format for templating and defining functions
+* Auto-scales as demand increases [including to zero](https://www.openfaas.com/blog/zero-scale/)
 
-From a terminal with administrator access (but not logged in as root), run:
+### Overview of OpenFaaS (Serverless Functions Made Simple)
 
-```
-minikube start
-```
+![Conceptual architecture](images/of-layer-overview.png)
 
-If minikube fails to start, see the drivers page for help setting up a compatible container or virtual-machine manager.
+- OpenFaaS Cloud builds upon OpenFaaS to deliver GitOps with GitHub.com or GitLab self-hosted.
+- NATS provides asynchronous execution and queuing.
+- Prometheus provides metrics and enables auto-scaling through AlertManager.
+- A container registry holds each immutable artifact that can be deployed on OpenFaaS via the API
 
-## 2. Interact with your cluster
+### Conceptual workflow
 
-If you already have kubectl installed, you can now use it to access your shiny new cluster:
+![Conceptual workflow](images/of-workflow.png)
 
-```
-kubectl get po -A
-```
+The Gateway can be accessed through its REST API, via the CLI or through the UI. All services or functions get a default route exposed, but custom domains can also be used for each endpoint.
 
-Alternatively, minikube can download the appropriate version of kubectl, if you don’t mind the double-dashes in the command-line:
+Prometheus collects metrics which are available via the Gateway's API and which are used for auto-scaling.
 
-```
-minikube kubectl -- get po -A
-```
+By changing the URL for a function from /function/NAME to /async-function/NAME an invocation can be run in a queue using NATS Streaming. You can also pass an optional callback URL.
 
-Initially, some services such as the storage-provisioner, may not yet be in a Running state. This is a normal condition during cluster bring-up, and will resolve itself momentarily. For additional insight into your cluster state, minikube bundles the Kubernetes Dashboard, allowing you to get easily acclimated to your new environment:
-
-```
-minikube dashboard
-```
-
-## 3. Deploy applications
-
-Create a sample deployment and expose it on port 8080:
-
-```
-kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
-kubectl expose deployment hello-minikube --type=NodePort --port=8080
-```
-
-It may take a moment, but your deployment will soon show up when you run:
-
-```
-kubectl get services hello-minikube
-```
-
-The easiest way to access this service is to let minikube launch a web browser for you:
-
-```
-minikube service hello-minikube
-```
-
-![Minikube service hello](images/kubectl_minikube.png)
-
-Alternatively, use kubectl to forward the port:
-
-```
-kubectl port-forward service/hello-minikube 7080:8080
-```
-![Minikube port-forwarding](images/kubectl_minikube_port_forwarding.png)
-
-
-## Step 2: [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
-
-### Set up repository
-
-1. Update ```apt``` package index and install packages to allow ```apt``` to use repository over HTTPS:
-
-```bash
-$ sudo apt-get update
-```
-
-```
-$ sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-```
-
-2. Add Docker's official GPG key:
-
-```
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-```
-
-3. Use the following command to set up the *stable" repository:
-
-```
-$ echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-### Install Docker Engine
-
-1. Update the apt package index, and install the latest version of Docker Engine and containerd, or go to the next step to install a specific version:
-
-```
-$ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-2. Verify that Docker Engine is installed correctly by running the ```hello-world``` image:
-
-```
-$ sudo docker run hello-world
-```
-
-**(Docker version: Docker version 20.10.8, build 3967b7d)**
-
-## Step 3: [Install Docker Compose](https://docs.docker.com/compose/install/)
-
-1. Run this command to download the current stable release of Docker Compose:
-
-```
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
-
-2. Apply executable permissions to the binary:
-
-```
-$ sudo chmod +x /usr/local/bin/docker-compose
-```
-
-3. Test the installation 
-
-```
-$ docker-compose --version
-```
-
-**(Docker Compose version: docker-compose version 1.29.2, build 5becea4c)**
-
-
-### Step 4: Build a cluster
-
-This repo requires access to a kubernetes cluster. To create a local cluster with `minikube` you can run 
-
-```shell
-## Start minikube
-minikube start --profile serverless-notebooks
-
-## Mount current repo into minikube
-## for pod access
-minikube mount $(pwd):/mnt &
-```
-
-You can also run `./bin/start_minikube.sh` for an easy scripted one liner.
+faas-netes is the most popular orchestration provider for OpenFaaS, but Docker Swarm, Hashicorp Nomad, AWS Fargate/ECS, and AWS Lambda have also been developed by the community. Providers are built with the faas-provider SDK.
 
 **Next ->** [OpenFaas Implementation](install.md)
